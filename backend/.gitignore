@@ -1,0 +1,63 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+
+# Virtual environments
+venv/
+.env/
+.venv/
+env/
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs e cache
+*.log
+*.sqlite3
+*.db
+*.bak
+*.tmp
+*.cache
+.cache/
+*.pid
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+
+# Pytest
+.pytest_cache/
+
+# Mypy
+.mypy_cache/
+
+# Pydantic settings
+.env
+
+# Build artefacts
+build/
+dist/
+*.egg-info/
+
+# Uvicorn
+*.pid
+
+# Docker
+**/__pycache__/
+**/*.pyc
+docker-compose.override.yml

@@ -1,11 +1,12 @@
 from typing import List
 from pydantic import PostgresDsn
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "E-Commerce Control"
     API: str = "/api"
+    API_V1: str = "/api/v1"
 
     CORS_ORIGIN: List[str] = ["*"]
 
@@ -14,6 +15,8 @@ class Settings(BaseSettings):
     database_port: int
     database_user: str
     database_password: str
+
+    jwt_secret_key: str
 
     class Config:
         env_file = ".env"

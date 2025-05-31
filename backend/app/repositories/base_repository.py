@@ -5,7 +5,6 @@ from sqlalchemy import asc, desc
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 
-from app.models.base_model import ORMBaseModel
 from app.core.exceptions import NotFoundError, DuplicatedError
 
 
@@ -37,6 +36,12 @@ class BaseRepository:
 
         results = query.all()
         return [item.__dict__ for item in results]
+
+    def get_one_by_filter(self, **kwargs) -> Any:
+        results = self.get_by_filter(**kwargs)
+        if results:
+            return results[0]
+        return None
 
     def get_by_id(self, id: int) -> Any:
         query = self.db.query(self.model).filter(self.model.id == id).first()

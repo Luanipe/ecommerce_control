@@ -22,3 +22,8 @@ class LoginResponseSchema(AutoConfigSchema):
     access_token: str
     expiration: datetime
     user_info: User
+
+
+class TokenSchema(AutoConfigSchema):
+    access_token: str
+    token_type: str

@@ -2,7 +2,7 @@ from datetime import datetime
 from pydantic import EmailStr
 
 from app.schemas.base_schema import AutoConfigSchema
-from app.models.user import User
+from app.models.user_model import User
 
 
 class RegisterSchema(AutoConfigSchema):

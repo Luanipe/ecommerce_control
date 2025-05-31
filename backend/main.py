@@ -1,13 +1,10 @@
 import uvicorn
-from fastapi import FastAPI, Depends
-from typing_extensions import Annotated
-from sqlalchemy.orm import Session
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from config import settings
-import app.core.dependencies as dependencies
+from app.api.v1.routes import routers as v1_routers
 
-from app.models.user import User
 
 class AppCreator:
     def __init__(self):
@@ -30,10 +27,7 @@ class AppCreator:
         def root():
             return "Hello, world! Service is running!"
 
-# @app.get("/")
-# def hello(db: Annotated[Session, Depends(dependencies.get_db_session)]):
-#     res = db.query(User).all()
-#     return {"users": res}
+        self.app.include_router(v1_routers, prefix=settings.API_V1)
 
 
 app_creator = AppCreator()

@@ -24,6 +24,7 @@ class AuthService(BaseService):
         user.password = self.auth.encrypt_password(user_info.password)
         created_user = self.user_repository.create(user)
         delattr(created_user, "password")
+
         return UserSchema.from_orm(created_user)
 
     def login(self, user_info: LoginSchema) -> TokenSchema:

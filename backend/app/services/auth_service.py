@@ -16,8 +16,10 @@ class AuthService(BaseService):
 
     def register(self, user_info: RegisterSchema) -> UserSchema:
         user = self.user_repository.get_by_filter(username=user_info.username)
+        
         if user:
             raise DuplicatedError(detail=f"user '{user_info.username}' already exists")
+        
         user = RegisterSchema(**user_info.dict())
         user.password = self.auth.encrypt_password(user_info.password)
         created_user = self.user_repository.create(user)
@@ -26,7 +28,9 @@ class AuthService(BaseService):
 
     def login(self, user_info: LoginSchema) -> TokenSchema:
         user = self.user_repository.get_one_by_filter(email=user_info.email__eq)
+        
         if not user or not self.auth.verify_password(user_info.password, user["password"]):
             raise AuthenticationError(detail="invalid username or password")
+        
         token = self.auth.create_access_token(data={"sub": user["username"]})
         return TokenSchema(access_token=token, token_type="bearer")

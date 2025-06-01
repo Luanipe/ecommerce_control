@@ -1,11 +1,12 @@
 from fastapi import APIRouter, Depends
+from fastapi.security import OAuth2PasswordRequestForm
 
 from app.core.container import Container
 
 from app.services.auth_service import AuthService
 
 from app.schemas.user_schema import UserSchema
-from app.schemas.auth_schema import RegisterSchema, LoginSchema, TokenSchema
+from app.schemas.auth_schema import RegisterSchema, TokenSchema
 
 
 router = APIRouter(
@@ -19,5 +20,5 @@ def register(user_info: RegisterSchema, service: AuthService = Depends(Container
 
 
 @router.post("/login", response_model=TokenSchema)
-def login(user_info: LoginSchema, service: AuthService = Depends(Container.get_auth_service)):
+def login(user_info: OAuth2PasswordRequestForm = Depends(), service: AuthService = Depends(Container.get_auth_service)):
     return service.login(user_info)

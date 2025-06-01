@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import Any, TypeVar, Type
+from typing import Any, TypeVar, Type, List
 
 from sqlalchemy import asc, desc
 from sqlalchemy.orm import Session
@@ -20,10 +20,12 @@ class BaseRepository:
         self.db = db
         self.model = model
 
-    def get_all(self):
+    def get_all(self, join_model: Any = None) -> List[Any]:
+        if join_model:
+            return self.db.query(self.model).join(join_model).all()
         return self.db.query(self.model).all()
 
-    def get_by_filter(self, ordering: Ordering = Ordering.ASC, order_by_field: str = "id", **kwargs) -> list[dict]:
+    def get_by_filter(self, ordering: Ordering = Ordering.ASC, order_by_field: str = "id", **kwargs) -> List[Any]:
         query = self.db.query(self.model)
 
         for field, value in kwargs.items():
@@ -37,8 +39,7 @@ class BaseRepository:
             else:
                 query = query.order_by(asc(order_column))
 
-        results = query.all()
-        return [item.__dict__ for item in results]
+        return query.all()
 
     def get_one_by_filter(self, **kwargs) -> Any:
         results = self.get_by_filter(**kwargs)
@@ -46,8 +47,12 @@ class BaseRepository:
             return results[0]
         return None
 
-    def get_by_id(self, id: int) -> Any:
-        query = self.db.query(self.model).filter(self.model.id == id).first()
+    def get_by_id(self, id: int, join_model: Any = None) -> Any:
+        query = self.db.query(self.model)
+        if join_model:
+            query = query.join(join_model).filter(self.model.id == id).first()
+        else:
+            query = query.filter(self.model.id == id).first()
         if not query:
             raise NotFoundError(detail=f"id {id} not found")
         return query

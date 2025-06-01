@@ -32,8 +32,8 @@ class AuthService(BaseService):
     def login(self, user_info: OAuth2PasswordRequestForm) -> TokenSchema:
         user = self.user_repository.get_one_by_filter(username=user_info.username)
         
-        if not user or not self.auth.verify_password(user_info.password, user["password"]):
+        if not user or not self.auth.verify_password(user_info.password, user.password):
             raise AuthenticationError(detail="invalid username or password")
         
-        token = self.auth.create_access_token(data={"sub": user["username"]})
+        token = self.auth.create_access_token(data={"sub": user.username})
         return TokenSchema(access_token=token, token_type="bearer")

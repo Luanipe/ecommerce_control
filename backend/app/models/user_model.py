@@ -19,3 +19,5 @@ class User(ORMBaseModel):
     purchases: Mapped[List["Sale"]] = relationship(back_populates="buyer", foreign_keys="[Sale.buyer_id]")
     sales_made: Mapped[List["Sale"]] = relationship(back_populates="seller", foreign_keys="[Sale.seller_id]")
 
+    def __str__(self):
+        return f"{self.name} {self.last_name}"

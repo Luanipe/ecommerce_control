@@ -49,7 +49,7 @@ class BaseRepository:
     def get_by_id(self, id: int) -> Any:
         query = self.db.query(self.model).filter(self.model.id == id).first()
         if not query:
-            return NotFoundError(detail=f"id {id} not found")
+            raise NotFoundError(detail=f"id {id} not found")
         return query
 
     def create(self, schema: T) -> Any:

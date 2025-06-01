@@ -20,6 +20,9 @@ class BaseRepository:
         self.db = db
         self.model = model
 
+    def get_all(self):
+        return self.db.query(self.model).all()
+
     def get_by_filter(self, ordering: Ordering = Ordering.ASC, order_by_field: str = "id", **kwargs) -> list[dict]:
         query = self.db.query(self.model)
 

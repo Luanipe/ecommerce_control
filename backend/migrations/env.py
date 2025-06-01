@@ -10,7 +10,15 @@ from alembic import context
 
 from config import Settings
 from app.core.database import Base
-from app import models  # import the package to migrate to register on metadata
+
+
+# import should use their real path to map
+# correctly when generate migrations
+from app.models.user_model import User
+from app.models.cart_model import Cart, CartItem
+from app.models.category_model import Category
+from app.models.product_model import Product
+from app.models.sale_model import Sale
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 

@@ -10,10 +10,18 @@ from app.services import *
 class Container:
     # get repositories
     @staticmethod
-    def get_user_repository(db: Session = Depends(get_db_session)):
+    def __get_user_repository(db: Session = Depends(get_db_session)) -> UserRepository:
         return UserRepository(db)
+
+    @staticmethod
+    def __get_category_repository(db: Session = Depends(get_db_session)) -> CategoryRepository:
+        return CategoryRepository(db)
 
     # get services
     @staticmethod
-    def get_auth_service(user_repo: UserRepository = Depends(get_user_repository)):
+    def get_auth_service(user_repo: UserRepository = Depends(__get_user_repository)) -> AuthService:
         return AuthService(user_repo)
+
+    @staticmethod
+    def get_category_service(category_repo: CategoryRepository = Depends(__get_category_repository)) -> CategoryService:
+        return CategoryService(category_repo)

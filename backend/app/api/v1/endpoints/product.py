@@ -21,7 +21,7 @@ def create_product(
     service: ProductService = Depends(Container.get_product_service),
     user: User = Depends(get_auth_user)
 ):
-    return service.create_product(product_info, user["id"])
+    return service.create_product(product_info, user.id)
 
 
 @router.get("/", response_model=List[ProductSchema])

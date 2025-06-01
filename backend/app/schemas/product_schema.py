@@ -18,4 +18,4 @@ class UserProductCreateSchema(ProductBaseSchema):
 
 
 class ProductSchema(BaseSchema, ProductBaseSchema):
-    seller_id: int
+    seller: str

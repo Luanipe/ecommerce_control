@@ -17,8 +17,10 @@ class ProductService(BaseService):
 
     def __inject_seller(self, p: Product) -> ProductSchema:
         product_dict = p.__dict__
-        seller_name = p.seller.__str__()
-        product_dict["seller"] = seller_name
+        product_dict.update({
+            "seller_id": p.seller_id,
+            "seller_name": p.seller.__str__()
+        })
         return ProductSchema(**product_dict)
 
     def create_product(self, product_info: ProductCreateSchema, seller_id: int) -> ProductSchema:

@@ -13,5 +13,9 @@ class ProductCreateSchema(ProductBaseSchema):
     pass
 
 
+class UserProductCreateSchema(ProductBaseSchema):
+    seller_id: int
+
+
 class ProductSchema(BaseSchema, ProductBaseSchema):
-    pass
+    seller_id: int

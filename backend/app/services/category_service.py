@@ -1,5 +1,7 @@
 from typing import List
 
+from app.core.exceptions import DuplicatedError
+
 from app.services.base_service import BaseService
 from app.repositories.category_repository import CategoryRepository
 
@@ -12,6 +14,9 @@ class CategoryService(BaseService):
         super().__init__(category_repository)
 
     def create_category(self, category_info: CategoryCreateSchema) -> CategorySchema:
+        category = self.category_repository.get_one_by_filter(name=category_info.name)
+        if category:
+            raise DuplicatedError(detail=f"the category '{category_info.name}' already exists'")
         category = self.category_repository.create(category_info)
         return category
 

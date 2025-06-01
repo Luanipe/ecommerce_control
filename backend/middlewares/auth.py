@@ -28,6 +28,9 @@ class AuthMiddleware:
     def decode_access_token(self, token: str) -> str | None:
         try:
             payload = jwt.decode(token, self.__SECRET_KEY, algorithms=[self.__ALGORITHM])
+            expire = payload.get("exp")
+            if expire and datetime.utcfromtimestamp(expire) < datetime.utcnow():
+                return None
             return payload.get("sub")
         except JWTError:
             return None

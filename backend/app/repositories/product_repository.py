@@ -1,6 +1,8 @@
 from typing import List, Any
 from sqlalchemy.orm import Session
 
+from app.core.exceptions import NotFoundError
+
 from app.models.user_model import User
 from app.models.product_model import Product
 
@@ -20,8 +22,12 @@ class ProductRepository(BaseRepository):
         return self.get_all(join_model)
 
     def get_product_by_id(self, id: int, join_model: Any = User.products) -> Product:
-        return self.get_by_id(id, join_model=join_model)
+        product = self.get_by_id(id, join_model=join_model)
+        if not product:
+            raise NotFoundError(detail="product not found")
+        return product
 
     def create_product(self, product_info: UserProductCreateSchema) -> Product:
-        self.category_repository.get_by_id(product_info.category_id)
+        if not self.category_repository.get_by_id(product_info.category_id):
+            raise NotFoundError(detail="category not found")
         return self.create(product_info)

@@ -53,8 +53,6 @@ class BaseRepository:
             query = query.join(join_model).filter(self.model.id == id).first()
         else:
             query = query.filter(self.model.id == id).first()
-        if not query:
-            raise NotFoundError(detail=f"id {id} not found")
         return query
 
     def create(self, schema: T) -> Any:

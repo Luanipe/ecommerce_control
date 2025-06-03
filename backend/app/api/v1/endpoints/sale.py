@@ -7,7 +7,7 @@ from app.core.container import Container
 from app.models.user_model import User
 
 from app.services.sale_service import SaleService
-from app.schemas.sale_schema import SaleSchema, SaleCreateSchema
+from app.schemas.sale_schema import SaleSchema, SaleBaseSchema, SaleCreateSchema
 
 
 router = APIRouter(
@@ -16,7 +16,7 @@ router = APIRouter(
 )
 
 
-@router.post("/create", response_model=SaleSchema)
+@router.post("/create", response_model=SaleBaseSchema)
 def create_sale(
     sale_info: SaleCreateSchema,
     service: SaleService = Depends(Container.get_sale_service),

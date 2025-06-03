@@ -21,6 +21,10 @@ class Container:
     def __get_product_repository(db: Session = Depends(get_db_session)) -> ProductRepository:
         return ProductRepository(db)
 
+    @staticmethod
+    def __get_sale_repository(db: Session = Depends(get_db_session)) -> SaleRepository:
+        return SaleRepository(db)
+
     # get services
     @staticmethod
     def get_auth_service(user_repo: UserRepository = Depends(__get_user_repository)) -> AuthService:
@@ -33,3 +37,7 @@ class Container:
     @staticmethod
     def get_product_service(product_repo: ProductRepository = Depends(__get_product_repository)) -> ProductService:
         return ProductService(product_repo)
+
+    @staticmethod
+    def get_sale_service(sale_repo: SaleRepository = Depends(__get_sale_repository)) -> SaleService:
+        return SaleService(sale_repo)

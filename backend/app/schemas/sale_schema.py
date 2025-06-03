@@ -18,4 +18,5 @@ class SaleCreateSchema(SaleBaseSchema):
 
 
 class SaleSchema(BaseSchema, SaleBaseSchema):
-    pass
+    buyer_name: str
+    seller_name: str

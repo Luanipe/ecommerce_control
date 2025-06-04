@@ -4,6 +4,7 @@ Projeto de e-commerce desenvolvido como parte do processo seletivo para Desenvol
 
 - **Backend**: [FastAPI](https://fastapi.tiangolo.com/) com autenticação JWT.
 - **Frontend**: [Next.js](https://nextjs.org/) com roteamento baseado em páginas, estilizado com [Tailwind CSS](https://tailwindcss.com/) e componentes do [ShadCN UI](https://ui.shadcn.com/).
+- **Client HTTP**: [Axios](https://axios-http.com/ptbr/docs/intro) para integração com o servidor FastAPI e serviços externos.
 - **Banco de Dados**: [PostgreSQL](https://www.postgresql.org/).
 - **Orquestração**: [Docker Compose](https://docs.docker.com/compose/).
 
@@ -17,6 +18,7 @@ Projeto de e-commerce desenvolvido como parte do processo seletivo para Desenvol
 - **Autenticação JWT**: Implementada para rotas protegidas.
 - **Banco de Dados**: PostgreSQL, com variáveis de ambiente configuradas no `docker-compose.yml`.
 - **Alembic**: Ferramenta em Python para gerenciar migrações de banco de dados.
+- **Pytest**: Framework de testes Python que simplifica a escrita e execução de testes.
 
 ### Frontend
 
@@ -28,6 +30,7 @@ Projeto de e-commerce desenvolvido como parte do processo seletivo para Desenvol
 
 ### DevOps
 
+- **Docker**: Plataforma de código aberto que permite aos desenvolvedores construir, executar e gerenciar contêineres.
 - **Docker Compose**: Facilita a orquestração de múltiplos serviços.
 
 ---
@@ -61,6 +64,28 @@ Projeto de e-commerce desenvolvido como parte do processo seletivo para Desenvol
 - **Registro e Login**: Realizados na mesma tela de forma dinâmica.
 - **Armazenamento do Token**: O token JWT é armazenado no localStorage.
 - **Proteção de Rotas**: Implementada no frontend para redirecionar usuários não autenticados para a tela de login.
+
+---
+
+## 📌 Funcionalidades
+
+- **Cadastro e Login de Usuários**: Com autenticação JWT.
+- **Cadastro de Entidades**: Cadastro de categorias e produtos.
+- **Listagem de Entidades**: Listagem de categorias, produtos e vendas.
+- **Histórico de Vendas**: Para controle de estoque dos produtos, quem vendeu e quem comprou.
+- **Rotas Protegidas**: Determinadas rotas acessíveis apenas para usuários autenticados.
+- **Hooks Personalizados**: `useFetch` e `useLoad` para requisições GET e `usePush` para POST/PUT.
+- **Estilização**: Utilização de Tailwind CSS e componentes do ShadCN UI.
+
+---
+
+## ⚙️ Pendências
+
+- **Componentes Compostos**: Criar componentes com o padrão de composição para melhor construção e reaproveitamento.
+- **Telas e Roteamento do Frontend**: Criar dashboard e tela de carrinho.
+- **Carrinho de Compras**: Implementar o carrinho de compras (já possui entidade no banco)
+- **Checkout de Produtos**: Implementar o módulo de checkout para registrar uma venda de determinado produto.
+- **Redis**: Adicionar cache com redis nas rotas de produto e vendas.
 
 ---
 

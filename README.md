@@ -73,3 +73,13 @@ Projeto de e-commerce desenvolvido como parte do processo seletivo para Desenvol
     ```bash
     docker exec -it server /bin/sh
     ```
+
+---
+
+## 📄 Licença
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](https://github.com/Luanipe/ecommerce_control/blob/master/LICENSE) para mais detalhes.
+
+--- 
+
+## 👤 Autor
+- **Luan Ipê**: [github.com/Luanipe](https://github.com/Luanipe)

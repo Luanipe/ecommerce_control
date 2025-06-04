@@ -16,6 +16,7 @@ Projeto de e-commerce desenvolvido como parte do processo seletivo para Desenvol
 - **FastAPI**: Framework moderno e de alto desempenho para APIs em Python.
 - **Autenticação JWT**: Implementada para rotas protegidas.
 - **Banco de Dados**: PostgreSQL, com variáveis de ambiente configuradas no `docker-compose.yml`.
+- **Alembic**: Ferramenta em Python para gerenciar migrações de banco de dados.
 
 ### Frontend
 
